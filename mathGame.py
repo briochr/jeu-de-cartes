@@ -208,16 +208,13 @@ class WinConditionCard(Card):
         return f"WinConditionCard(name='{self._name}', win_condition={self.win_condition.__name__})"
 
 
-# Initializing the LA PIOCHE
 pioche = CardContainer()
 
-# Setting up cards on the table at the start
 cartes_sur_la_table = CardContainer()
 [cartes_sur_la_table.append(CardTable(str(i), Value(i, 0))) for i in range(10)]
 cartes_sur_la_table.append(CardTable("e", Value(math.e, 0)))
 cartes_sur_la_table.append(CardTable("pi", Value(math.pi, 0)))
 
-# Adding function cards to the deck
 pioche.append(FunctionCard("sin", lambda v: Value(math.sin(v.value), 0)))
 pioche.append(FunctionCard("cos", lambda v: Value(math.cos(v.value), 0)))
 
@@ -268,12 +265,12 @@ while pioche.cards:
         elif choice == 'end':
             break
 
-        elif re.match(r'[+\-*/%^=]', choice):  # find an operator
+        elif re.match(r'[+\-*/%^=]', choice): # find an operator
             pattern = r'[+\-*/%^=]'
             operator = re.findall(pattern, choice)[0]
             stack.append(Operand(operator))
 
-        elif re.match(r"\b(1000|[1-9][0-9]{0,2}|0)\b", choice):  # find a card
+        elif re.match(r"\b(1000|[1-9][0-9]{0,2}|0)\b", choice): # find a card
             pattern = r"\b(1000|[1-9][0-9]{0,2}|0)\b"
             matches = re.findall(pattern, choice)
             card_index = int(matches[0]) if matches else None
